@@ -6,13 +6,18 @@ npm install
 ```
 
 ### Compiles and hot-reloads for development
+### SPA
 ```
 npm run serve
+```
+### SSR
+```
+npm run koa:dev
 ```
 
 ### Compiles and minifies for production
 ```
-npm run build
+npm run build:win
 ```
 
 ### Run your tests
