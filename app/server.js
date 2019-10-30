@@ -1,11 +1,26 @@
-const Server = require("koa");
-const app = new Server();
+const koa = require("koa");
+const koaStatic = require("koa-static");
+const path = require("path");
 
-const devMiddleWare = require("./middlewares/dev");
+const app = new koa();
+
 const devSsrMiddleWare = require("./middlewares/dev.ssr");
+const devStaticMiddleWare = require("./middlewares/dev.static");
 
-// app.use(devMiddleWare);
-app.use(devSsrMiddleWare);
+console.log(process.env.NODE_ENV);
+
+
+
+app.use(koaStatic(
+  path.join(__dirname, "./public")
+));
+
+if (process.env.NODE_ENV === "dev") {
+
+  app.use(devStaticMiddleWare);
+
+  app.use(devSsrMiddleWare);
+}
 
 app.use(async ctx => {
   ctx.body = "Hello World";
