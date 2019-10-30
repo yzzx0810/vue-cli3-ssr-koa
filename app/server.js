@@ -7,12 +7,18 @@ const app = new koa();
 const devSsrMiddleWare = require("./middlewares/dev.ssr");
 const devStaticMiddleWare = require("./middlewares/dev.static");
 
-console.log(process.env.NODE_ENV);
+const prodSsrMiddleWare = require("./middlewares/prod.ssr");
 
+console.log(process.env.NODE_ENV);
+console.log(process.env.PWD);
 
 
 app.use(koaStatic(
   path.join(__dirname, "./public")
+));
+
+app.use(koaStatic(
+  path.join(__dirname, "../dist")
 ));
 
 if (process.env.NODE_ENV === "dev") {
@@ -20,6 +26,8 @@ if (process.env.NODE_ENV === "dev") {
   app.use(devStaticMiddleWare);
 
   app.use(devSsrMiddleWare);
+} else {
+  app.use(prodSsrMiddleWare);
 }
 
 app.use(async ctx => {

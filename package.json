@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "koa:dev": "NODE_ENV=dev nodemon app/server.js",
+    "koa:start": "node app/server.js",
     "serve": "vue-cli-service serve",
     "build:client": "vue-cli-service build",
     "build:server": "WEBPACK_TARGET=node vue-cli-service build",
